@@ -1,11 +1,7 @@
 const gulp = require('gulp');
 const babel = require('rollup-plugin-babel');
-const concat = require('gulp-concat');
-const rename = require('gulp-rename');
-const uglify = require('gulp-uglify');
 const rollup = require('rollup');
 const commonjs = require('rollup-plugin-commonjs');
-const nodeResolve = require('rollup-plugin-node-resolve');
 
 // Concatenate & Minify src and dependencies
 gulp.task('scripts', function () {
