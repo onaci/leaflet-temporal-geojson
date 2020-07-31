@@ -85,7 +85,7 @@ const layer = L.temporalGeoJSONLayer({
 |`getFrame`||Get the current frame time (-1 if not set)|
 |`getFrameKeys`||Get an ascending array of all ISO times (can then be used to call `setFrame`)|
 |`isActive`||check if the layer is currently active on the map|
-|`setFrame`|`time: {String}`|display the features at the given ISO time (if calling from something like a range slider, recommended to throttle - see demo)|
+|`setFrame`|`time: {String}`|display the features at the given ISO time (if calling from something like a range slider, recommended to throttle - see demo). Set null to clear frames|
 
 
 ## example data

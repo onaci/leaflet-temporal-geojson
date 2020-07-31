@@ -79,12 +79,12 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 	setFrame(key) {
 		if (!this.isActive()) return;
 
-		if (this._frameKey !== null) {
-			this._map.removeLayer(this._frameLayers[this._frameKey]);
-		}
-
+		const prevFrame = this._frameLayers[this._frameKey];
+		if (prevFrame) this._map.removeLayer(prevFrame);
+		
 		this._frameKey = key;
-		this._map.addLayer(this._frameLayers[this._frameKey]);
+		const nextFrame = this._frameLayers[this._frameKey];
+		if(nextFrame) this._map.addLayer(nextFrame);
 	},
 
 	/*------------------------------------ PRIVATE ------------------------------------------*/
