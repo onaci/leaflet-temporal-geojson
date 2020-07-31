@@ -51,8 +51,8 @@ const layer = L.temporalGeoJSONLayer({
       "geometry": {
         "type": "Point",
         "coordinates": [
-          146.9531,
-          -43.5803
+          156,
+          -45
         ]
       }
     },
