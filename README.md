@@ -29,7 +29,7 @@ npm run build
 
 ## use and options
 
-See demo for detailed example.
+See [demo](https://onaci.github.io/leaflet-temporal-geojson/) for detailed example.
 
 ```javascript
 const layer = L.temporalGeoJSONLayer({
