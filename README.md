@@ -66,7 +66,7 @@ const layer = L.temporalGeoJSONLayer({
   // OPTIONAL - additional options to style point data (e.g. radius)
   // this has lower priority than styles from featureStyle()
   // https://leafletjs.com/reference-1.6.0.html#circlemarker
-	circleMarkerOptions: {},
+  circleMarkerOptions: {},
 
   // OPTIONAL - callbacks when layer is added/removed from map
   onAdd: function(){},
