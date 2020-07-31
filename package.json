@@ -1,0 +1,42 @@
+{
+	"name": "leaflet-temporal-geojson",
+	"version": "0.0.0",
+	"description": "Animate GeoJSON features using an arbitrary time property",
+	"main": "dist/leaflet-temporal-geojson.js",
+	"license": "SEE LICENSE IN LICENCE",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "./node_modules/gulp/bin/gulp.js"
+	},
+	"keywords": [
+		"leaflet",
+		"visualization",
+		"visualisation",
+		"geojson",
+		"overlay"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/onaci/leaflet-temporal-geojson.git"
+	},
+	"bugs": {
+		"url": "https://github.com/onaci/leaflet-temporal-geojson/issues"
+	},
+	"homepage": "https://github.com/onaci/leaflet-temporal-geojson#readme",
+	"author": "daniel.wild@csiro.au",
+	"peerDependencies": {
+		"leaflet": "^1.5.1"
+	},
+	"devDependencies": {
+		"babel-preset-es2015": "^6.24.0",
+		"gulp": "^4.0.2",
+		"gulp-babel": "^6.1.2",
+		"gulp-concat": "^2.6.0",
+		"gulp-rename": "^1.2.2",
+		"gulp-uglify": "^1.5.4",
+		"rollup": "^0.63.4",
+		"rollup-plugin-babel": "^3.0.7",
+		"rollup-plugin-commonjs": "^9.1.3",
+		"rollup-plugin-node-resolve": "^3.3.0"
+	}
+}
