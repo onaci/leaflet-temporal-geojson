@@ -30,19 +30,19 @@ See demo for detailed example.
 
 ```javascript
 const layer = L.temporalGeoJSONLayer({
-	
-	// which property to use for time (expects ISO 8601 string)
-	timeKey: "time",
-	
+
+  // which property to use for time (expects ISO 8601 string)
+  timeKey: "time",
+  
   // optional function to return style 
   // see path options: https://leafletjs.com/reference-1.6.0.html#path-option
-	featureStyle: function(feature) { 
+  featureStyle: function(feature) { 
     return {}; 
   },
-	
-	// array of geojson features
-	features: [
-		{
+  
+  // array of geojson features
+  features: [
+    {
       "type": "Feature",
       "properties": {
         "age": 1,
@@ -56,7 +56,7 @@ const layer = L.temporalGeoJSONLayer({
         ]
       }
     },
-	],
+  ],
 
   // OPTIONAL - supply the name of a custom pane,
   // will be created if doesn't exist, defaults to overlayPane
