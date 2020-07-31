@@ -1,13 +1,16 @@
 # leaflet-temporal-geojson [![NPM version][npm-image]][npm-url] [![NPM Downloads][npm-downloads-image]][npm-url]
 
-A leaflet (v1+) plugin animate GeoJSON features using an arbitrary time property.
+An unopinionated leaflet (v1+) plugin to animate GeoJSON features using an arbitrary time property:
+
+- *You* provide the frame change implementation (range slider components, API calls, whatever 🤷‍♂️)
+- *You* control feature styling (static, dynamic, whatever 🤷‍♀️)
 
 ![Screenshot](/screenshots/keyframes.gif?raw=true)
 
 ## how does it work
 
 - features are clustered into layer 'keyframes' using supplied time property
-- keyframes are drawn to html canvas depending on time
+- keyframes are drawn to html canvas depending on time key
 - features may have custom styles applied using property features
 
 ## notes
@@ -83,8 +86,6 @@ const layer = L.temporalGeoJSONLayer({
 |`getFrameKeys`||Get an ascending array of all ISO times (can then be used to call `setFrame`)|
 |`isActive`||check if the layer is currently active on the map|
 |`setFrame`|`time: {String}`|display the features at the given ISO time (if calling from something like a range slider, recommended to throttle - see demo)|
-|`onAdd`||optional callback when layer has been added to map|
-|`onRemove`||optional callback when layer has been removed from map|
 
 
 ## example data
