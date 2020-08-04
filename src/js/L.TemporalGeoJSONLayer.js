@@ -30,6 +30,7 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 		this._active = true;
 		this._map = map;
 		this._frameKey = null;
+		if (!this.options.rendererFactory) this.options.rendererFactory = L.canvas;
 		this._setPane();
 		this._createFrames();
 		if (this.options.onAdd) this.options.onAdd();
@@ -102,7 +103,7 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 
 		this._frameLayers = {};
 		const that = this;
-		const renderer = L.canvas({ pane: this._paneName });
+		const renderer = this.options.rendererFactory({ pane: this._paneName });
 
 		const circleMarkerOptions = this.options.circleMarkerOptions || {}; 
 		circleMarkerOptions.renderer = renderer;
@@ -119,10 +120,10 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 					return L.circleMarker(latlng, circleMarkerOptions);
 				},
 				style(feature) {
-					if (!that.options.featureStyle) {
+					if (!that.options.style) {
 						return that._defaultStyle;
 					}
-					return that.options.featureStyle(feature);
+					return that.options.style(feature);
 				},
 				renderer: renderer
 			});

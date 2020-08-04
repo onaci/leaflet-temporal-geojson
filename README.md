@@ -1,8 +1,8 @@
 # leaflet-temporal-geojson [![NPM version][npm-image]][npm-url] [![NPM Downloads][npm-downloads-image]][npm-url]
 
-An unopinionated leaflet (v1+) plugin to animate GeoJSON features using an arbitrary time property:
+A somewhat unopinionated leaflet (v1+) plugin to animate GeoJSON features using an arbitrary time property:
 
-- *You* provide the frame change implementation (range slider components, API calls, whatever 🤷‍♂️)
+- *You* provide the frame change implementation (event driven range slider components, methods calls, whatever 🤷‍♂️)
 - *You* control feature styling (static, dynamic, whatever 🤷‍♀️)
 
 ![Screenshot](/screenshots/keyframes.gif?raw=true)
@@ -10,11 +10,11 @@ An unopinionated leaflet (v1+) plugin to animate GeoJSON features using an arbit
 ## how does it work
 
 - features are clustered into layer 'keyframes' using supplied time property
-- keyframes are drawn to html canvas depending on time key
-- features may have custom styles applied using property features
+- keyframes are rendered depending on time key
+- features may have custom styles applied using properties
 
 ## notes
-- to leverage canvas performance, points are rendered as `L.circleMarker` vectors using L.geoJSON's `pointToLayer` function 
+- to improve rendering performance, points are rendered as `L.circleMarker` vectors using L.geoJSON's `pointToLayer` function 
 
 ## install
 ```shell
@@ -39,7 +39,7 @@ const layer = L.temporalGeoJSONLayer({
   
   // optional function to return style 
   // see path options: https://leafletjs.com/reference-1.6.0.html#path-option
-  featureStyle: function(feature) { 
+  style: function(feature) { 
     return {}; 
   },
   
@@ -67,9 +67,14 @@ const layer = L.temporalGeoJSONLayer({
   paneName: 'myCustomPane',
 
   // OPTIONAL - additional options to style point data (e.g. radius)
-  // this has lower priority than styles from featureStyle()
+  // this has lower priority than styles from style()
   // https://leafletjs.com/reference-1.6.0.html#circlemarker
   circleMarkerOptions: {},
+
+  // OPTIONAL - renderer factory
+  // One of: L.canvas, L.svg (defaults to canvas)
+  // Note: L.svg is not recommended due to performance overhead
+  rendererFactory: L.canvas,
 
   // OPTIONAL - callbacks when layer is added/removed from map
   onAdd: function(){},
