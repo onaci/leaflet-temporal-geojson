@@ -21,7 +21,7 @@ $(document).ready(function () {
 	// INIT
 	const temporalGeoJSONLayer = L.temporalGeoJSONLayer({
 		features: data.features,
-		featureStyle(feature) {
+		style(feature) {
 			return {
 				// do custom styling things
 				fillColor: color(feature.properties.age),
