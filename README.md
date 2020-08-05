@@ -2,8 +2,8 @@
 
 A somewhat unopinionated leaflet (v1+) plugin to animate GeoJSON features using an arbitrary time property:
 
-- *You* provide the frame change implementation (event driven range slider components, methods calls, whatever 🤷‍♂️)
-- *You* control feature styling (static, dynamic, whatever 🤷‍♀️)
+- You decide how to change frames (event driven range slider components, methods calls, whatever 🤷‍♂️)
+- You control feature styling (static, dynamic, whatever 🤷‍♀️)
 
 ![Screenshot](/screenshots/keyframes.gif?raw=true)
 
@@ -14,7 +14,7 @@ A somewhat unopinionated leaflet (v1+) plugin to animate GeoJSON features using 
 - features may have custom styles applied using properties
 
 ## notes
-- to improve rendering performance, points are rendered as `L.circleMarker` vectors using L.geoJSON's `pointToLayer` function 
+- to improve rendering performance, points are rendered as `L.circleMarker` vectors using L.geoJSON's `pointToLayer` function (i.e. to avoid use of DOM `<img>` for markers)
 
 ## install
 ```shell
