@@ -53,4 +53,14 @@ $(document).ready(function () {
 	$('#keyFrameSlider').on('input', throttledHandler);
 	$('#keyFrameSlider').prop('max', frameKeys.length - 1);
 
+	// DEMO - update style function
+	$('#setStyle').on('click', () => {
+		temporalGeoJSONLayer.setStyle(function(feature) { return {
+			fill: false,
+			stroke: true,
+			color: color(feature.properties.age),
+			weight: 1
+		}});
+	});
+
 });

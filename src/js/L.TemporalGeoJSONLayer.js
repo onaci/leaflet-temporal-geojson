@@ -6,6 +6,7 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 
 	_active: false,
 	_map: null,
+	_renderer: null,
 	// the DOM leaflet-pane that contains our layer
 	_pane: null,
 	_paneName: 'overlayPane',
@@ -80,12 +81,38 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 	setFrame(key) {
 		if (!this.isActive()) return;
 
+		// clear existing
 		const prevFrame = this._frameLayers[this._frameKey];
 		if (prevFrame) this._map.removeLayer(prevFrame);
 		
+		// set new if we have target
 		this._frameKey = key;
 		const nextFrame = this._frameLayers[this._frameKey];
 		if(nextFrame) this._map.addLayer(nextFrame);
+	},
+
+	/**
+	 * Changes styles of GeoJSON vector layers with the given style function
+	 * @param {function} style 
+	 */
+	setStyle(style) {
+		// clear any current keyframe
+		const staleFrame = this._frameLayers[this._frameKey];
+		if (staleFrame) this._map.removeLayer(staleFrame);
+
+		// use default style if none provided
+		if (!style) style = (feature) => { return this._defaultStyle };
+		
+		// re-init each frame with style
+		this._times.forEach(time => {
+			const slicedFeatures = this.options.features.filter(f => f.properties[this.options.timeKey] === time);
+			const featureCollection = {	type: 'FeatureCollection', features: slicedFeatures };
+			const layer = this._createFrameLayer(featureCollection, this._renderer, style);
+			this._frameLayers[time] = layer;
+		});
+
+		// restore frame with new style
+		if (staleFrame) this.setFrame(this._frameKey);
 	},
 
 	/*------------------------------------ PRIVATE ------------------------------------------*/
@@ -98,37 +125,40 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 
 		// get sorted list of dates
 		const dates = features.map(f => new Date(f.properties[this.options.timeKey])).sort((a,b) => a - b );
+		
 		// uniq list of ISO strings
 		this._times = [...new Set(dates.map(d => d.toISOString()))]; 
-
 		this._frameLayers = {};
+		this._renderer = this.options.rendererFactory({ pane: this._paneName });
+		
 		const that = this;
-		const renderer = this.options.rendererFactory({ pane: this._paneName });
+		this._times.forEach(time => {
+			const slicedFeatures = features.filter(f => f.properties[this.options.timeKey] === time);
+			const featureCollection = {	type: 'FeatureCollection', features: slicedFeatures };
+			let style = () => { return that._defaultStyle; };
+			if (that.options.style) style = that.options.style
+			
+			const layer = this._createFrameLayer(featureCollection, this._renderer, style);
+			this._frameLayers[time] = layer;
+		});
+	},
 
+	/**
+	 * Create a L.geoJSON layer for the keyframe
+	 * @param {object} featureCollection 
+	 * @param {object} renderer - L.renderer
+	 * @param {function} style 
+	 */
+	_createFrameLayer(featureCollection, renderer, style) {
 		const circleMarkerOptions = this.options.circleMarkerOptions || {}; 
 		circleMarkerOptions.renderer = renderer;
 
-		this._times.forEach(time => {
-			const slicedFeatures = features.filter(f => f.properties[this.options.timeKey] === time);
-			const featureCollection = {	
-				type: 'FeatureCollection',
-				features: slicedFeatures
-			};
-			
-			const layer = L.geoJSON(featureCollection, {
-				pointToLayer(geoJsonPoint, latlng) {
-					return L.circleMarker(latlng, circleMarkerOptions);
-				},
-				style(feature) {
-					if (!that.options.style) {
-						return that._defaultStyle;
-					}
-					return that.options.style(feature);
-				},
-				renderer: renderer
-			});
-
-			this._frameLayers[time] = layer;
+		return L.geoJSON(featureCollection, {
+			pointToLayer(geoJsonPoint, latlng) {
+				return L.circleMarker(latlng, circleMarkerOptions);
+			},
+			style,
+			renderer
 		});
 	},
 

@@ -71,3 +71,11 @@ html, body {
     background: #4CAF50;
     cursor: pointer;
 }
+
+#setStyle {
+    position: absolute;
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    bottom: 15px;
+}

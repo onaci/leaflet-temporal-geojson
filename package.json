@@ -1,6 +1,6 @@
 {
 	"name": "leaflet-temporal-geojson",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Animate GeoJSON features using an arbitrary time property",
 	"main": "dist/leaflet-temporal-geojson.js",
 	"license": "SEE LICENSE IN LICENCE",
