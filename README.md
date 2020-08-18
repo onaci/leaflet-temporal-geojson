@@ -92,6 +92,7 @@ const layer = L.temporalGeoJSONLayer({
 |`isActive`||check if the layer is currently active on the map|
 |`setFrame`|`time: {string}`|display the features at the given ISO time (if calling from something like a range slider, recommended to throttle - see demo). 
 |`setStyle`|`style: {function}`|Changes styles of GeoJSON vector layers with the given style function. Set falsey for defaults.|
+|`getBounds`|`time {string}`|Get the bounds at given time (falls back to bounds of current keyframe, and then bounds of first keyframe if not set).|
 
 
 ## example data

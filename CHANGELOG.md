@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [0.3.0] 2020-08-18
+
+### Added
+
+- public method `getBounds` to access [LatLngBounds](https://leafletjs.com/reference-1.6.0.html#latlngbounds) of a keyframe layer
+
 ## [0.2.0] 2020-08-18
 
 ### Added

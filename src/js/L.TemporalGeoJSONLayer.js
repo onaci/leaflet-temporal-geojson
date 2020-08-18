@@ -115,6 +115,21 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 		if (staleFrame) this.setFrame(this._frameKey);
 	},
 
+	/**
+	 * Returns L.latLngBounds at the supplied time,
+	 * if time omited, it returns bounds of the **current** keyframe layer,
+	 * and if no frame is active - returns bounds of the **first** keyframe
+	 */
+	getBounds(time) {
+		if (time === undefined && this._frameKey) {
+			time = this._frameKey;
+		} else if (index === undefined) {
+			time = this._times[0];
+		}
+		const layer = this._frameLayers[time];
+		return layer.getBounds();
+	},
+
 	/*------------------------------------ PRIVATE ------------------------------------------*/
 
 	/**

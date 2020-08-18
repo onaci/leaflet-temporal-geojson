@@ -55,12 +55,14 @@ $(document).ready(function () {
 
 	// DEMO - update style function
 	$('#setStyle').on('click', () => {
-		temporalGeoJSONLayer.setStyle(function(feature) { return {
-			fill: false,
-			stroke: true,
-			color: color(feature.properties.age),
-			weight: 1
-		}});
+		console.log(temporalGeoJSONLayer.getBounds());
+		
+		// temporalGeoJSONLayer.setStyle(function(feature) { return {
+		// 	fill: false,
+		// 	stroke: true,
+		// 	color: color(feature.properties.age),
+		// 	weight: 1
+		// }});
 	});
 
 });
