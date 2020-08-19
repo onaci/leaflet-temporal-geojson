@@ -32,7 +32,12 @@ $(document).ready(function () {
 			radius: 10
 		},
 		paneName: paneName,
-		timeKey: "time"
+		timeKey: "time",
+
+		// OPTIONAL
+		popupFunction(layer) {
+			return `wow, very popup: ${layer.feature.properties.time}`;
+		}
 	});
 
 	// GENERAL - layer stuff

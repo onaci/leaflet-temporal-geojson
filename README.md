@@ -78,7 +78,13 @@ const layer = L.temporalGeoJSONLayer({
 
   // OPTIONAL - callbacks when layer is added/removed from map
   onAdd: function(){},
-  onRemove: function(){}
+  onRemove: function(){},
+
+  // OPTIONAL - function to control feature popups
+  // https://leafletjs.com/reference-1.6.0.html#geojson
+  popupFunction(layer) {
+    return `the time here is: ${layer.feature.properties.time}`
+  }
 
 });
 ```

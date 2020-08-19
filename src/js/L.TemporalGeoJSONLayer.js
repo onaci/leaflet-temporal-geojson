@@ -168,13 +168,16 @@ const TemporalGeoJSONLayer = (L.Layer ? L.Layer : L.Class).extend({
 		const circleMarkerOptions = this.options.circleMarkerOptions || {}; 
 		circleMarkerOptions.renderer = renderer;
 
-		return L.geoJSON(featureCollection, {
+		const frameLayer = L.geoJSON(featureCollection, {
 			pointToLayer(geoJsonPoint, latlng) {
 				return L.circleMarker(latlng, circleMarkerOptions);
 			},
 			style,
 			renderer
 		});
+		
+		if (this.options.popupFunction) frameLayer.bindPopup(this.options.popupFunction);
+		return frameLayer;
 	},
 
 	/**

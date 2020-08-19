@@ -2,6 +2,12 @@
 
 Notable changes to this project will be documented in this file.
 
+## [0.4.0] 2020-08-19
+
+### Added
+
+- `popupFunction` option to bind [geojson feature popups](https://leafletjs.com/reference-1.6.0.html#geojson) 
+
 ## [0.3.0] 2020-08-18
 
 ### Added
