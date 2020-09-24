@@ -15,6 +15,7 @@ A somewhat unopinionated leaflet (v1+) plugin to animate GeoJSON features using 
 
 ## notes
 - to improve rendering performance, points are rendered as `L.circleMarker` vectors using L.geoJSON's `pointToLayer` function (i.e. to avoid use of DOM `<img>` for markers)
+- if you only have points, and lots of them - you should check out: [leaflet-point-animator](https://github.com/onaci/leaflet-point-animator) instead.
 
 ## install
 ```shell
